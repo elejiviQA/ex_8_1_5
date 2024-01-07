@@ -21,7 +21,6 @@ public class WbChangeCityMenuSteps {
         return this;
     }
 
-    @Step("Поиск первого адреса из результирующего списка")
     public SelenideElement getFirstAddress() {
         return menu.addressesBlock().getFirstAddress();
     }
@@ -31,12 +30,10 @@ public class WbChangeCityMenuSteps {
         menu.addressesBlock().selectFirstAddress();
     }
 
-    @Step("Поиск адреса из блока информации о центре выдачи")
     public SelenideElement getInfoBlockAddress() {
         return infoBlock.getInfoBlockAddress();
     }
 
-    @Step("Поиск блока информации о центре выдачи")
     public SelenideElement getInfoBlock() {
         return infoBlock.getInfoBlock();
     }

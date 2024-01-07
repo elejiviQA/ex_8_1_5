@@ -18,6 +18,7 @@ public class WbSecondWrapNavBarMenuSteps {
         return new WbThirdWrapNavBarMenuSteps();
     }
 
+    @Step("Нажатие на Ноутбуки")
     public WbCatalogPageSteps clickLaptops() {
         secondWrapNavBarMenu.clickLaptops();
         return new WbCatalogPageSteps();

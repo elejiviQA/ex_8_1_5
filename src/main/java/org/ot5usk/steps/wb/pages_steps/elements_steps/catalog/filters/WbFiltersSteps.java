@@ -13,7 +13,6 @@ public class WbFiltersSteps {
         this.filters = filters;
     }
 
-    @Step("Поиск выбранных фильтров")
     public ElementsCollection getSelectedFilters() {
         return filters.getSelectedFilters();
     }
@@ -24,12 +23,10 @@ public class WbFiltersSteps {
         return new WbFiltersMenuSteps();
     }
 
-    @Step("Поиск навигационного фильтра")
     public SelenideElement navBarFilterBtn() {
         return filters.getNavBarFilterBtn();
     }
 
-    @Step("Поиск базового фильтра ранжирования")
     public SelenideElement baseRangingFilterBtn() {
         return filters.getBaseRangingFilterBtn();
     }

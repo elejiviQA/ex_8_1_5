@@ -42,12 +42,10 @@ public class WbFiltersMenuSteps {
         new WbCatalogPageSteps();
     }
 
-    @Step("Поиск кнопки Сбросить")
     public SelenideElement getResetBtn() {
         return filtersMenu.getResetBtn();
     }
 
-    @Step("Поиск количества товаров в меню фильтров")
     public SelenideElement getProductsCounter() {
         return filtersMenu.getProductsCounter();
     }

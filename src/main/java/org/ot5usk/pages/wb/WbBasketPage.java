@@ -8,17 +8,12 @@ import static com.codeborne.selenide.Selenide.$x;
 public class WbBasketPage extends WbBaseElements {
 
     private final static String URL = "https://www.wildberries.ru/lk/basket";
-    private final SelenideElement cardName = $x("//div/a/span[@class='good-info__good-name']");
     private final SelenideElement cardTitle = $x("//a[@class='good-info__title j-product-popup']");
     private final SelenideElement newCardPrice = $x("//div[@class='list-item__price-new']");
     private final SelenideElement oldCardPrice = $x("//div[@class='list-item__price-old']");
     private final SelenideElement newTotalPrice = $x("//div[@class='list-item__price-new']");
     private final SelenideElement oldTotalPrice = $x("//div[@class='list-item__price-old']");
     private final SelenideElement orderBtn = $x("//div[@class='basket-order__b-btn b-btn']");
-
-    public SelenideElement getCardName() {
-        return cardName;
-    }
 
     public SelenideElement getCardTitle() {
         return cardTitle;

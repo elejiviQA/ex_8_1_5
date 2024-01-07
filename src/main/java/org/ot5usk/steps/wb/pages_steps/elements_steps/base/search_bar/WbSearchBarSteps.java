@@ -30,7 +30,6 @@ public class WbSearchBarSteps {
         searchBar.clickTheCross();
     }
 
-    @Step("Поиск крестика")
     public SelenideElement getCross() {
         return searchBar.getCross();
     }

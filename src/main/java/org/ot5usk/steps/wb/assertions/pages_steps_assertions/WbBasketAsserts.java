@@ -12,7 +12,6 @@ import java.util.List;
 import static com.codeborne.selenide.Condition.text;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.ot5usk.steps.wb.pages_steps.card.WbCardPageStepsTempStorage.getCardName;
 import static org.ot5usk.steps.wb.pages_steps.catalog.WbCatalogPageStepsTempStorage.*;
 
 public class WbBasketAsserts {
@@ -45,13 +44,6 @@ public class WbBasketAsserts {
     @Step("Проверка цвета счетчика количества товаров в корзине")
     public static void checkCounterOfCardsInBasketColor() {
         assertEquals(expectedCounterOfCardsInBasketColor, catalogPageSteps.getCounterOfCardsInBasket().getCssValue("background-color"));
-    }
-
-    @Step("Проверка наличия товара в корзине путём сверки имен товаров: со страницы карточки товара и товара в корзине")
-    public static void checkCardNameInBasket() {
-        String expectedProductName = getCardName();
-        String actualProductName = basketPageSteps.getCardName().getText();
-        assertEquals(expectedProductName, actualProductName);
     }
 
     @Step("Проверка имени и брэнда товара в коризине")
