@@ -14,24 +14,4 @@ public class WbBasketPageSteps {
     public SelenideElement getCardTitle() {
         return basketPage.getCardTitle();
     }
-
-    public SelenideElement getNewCardPrice() {
-        return basketPage.getNewCardPrice();
-    }
-
-    public SelenideElement getOldCardPrice() {
-        return basketPage.getOldCardPrice();
-    }
-
-    public SelenideElement getNewTotalPrice() {
-        return basketPage.getNewTotalPrice();
-    }
-
-    public SelenideElement getOldTotalPrice() {
-        return basketPage.getOldTotalPrice();
-    }
-
-    public SelenideElement getOrderBtn() {
-        return basketPage.orderBtn();
-    }
 }

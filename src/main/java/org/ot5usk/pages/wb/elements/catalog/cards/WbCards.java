@@ -9,9 +9,8 @@ public class WbCards {
     private final SelenideElement card = $x("//div[@class='product-card__wrapper']");
     private final SelenideElement addToBasketBtn = $x("//a[contains(@data-link, '/lk/basket')]");
     private final SelenideElement cardName = $x("//article[@data-nm-id][1]//span[@class='product-card__name']");
+
     private final SelenideElement cardBrand = $x("//article[@data-nm-id][1]//span[@class='product-card__brand']");
-    private final SelenideElement newCardPrice = $x("//ins[@class='price__lower-price']");
-    private final SelenideElement oldCardPrice = $x("//del");
 
     public SelenideElement getCard() {
         return card;
@@ -27,13 +26,5 @@ public class WbCards {
 
     public SelenideElement getCardBrand() {
         return cardBrand;
-    }
-
-    public SelenideElement getNewCardPrice() {
-        return newCardPrice;
-    }
-
-    public SelenideElement getOldCardPrice() {
-        return oldCardPrice;
     }
 }

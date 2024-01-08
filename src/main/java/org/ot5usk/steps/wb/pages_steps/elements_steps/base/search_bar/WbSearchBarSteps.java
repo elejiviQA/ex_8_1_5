@@ -20,9 +20,9 @@ public class WbSearchBarSteps {
     }
 
     @Step("Нажатие Enter в поисковой строке")
-    public WbCatalogPageSteps sendEnter() {
+    public void sendEnter() {
         searchBar.sendEnter();
-        return new WbCatalogPageSteps();
+        new WbCatalogPageSteps();
     }
 
     @Step("Нажатие на крестик поисковой строки")

@@ -43,12 +43,4 @@ public class WbCardsSteps extends WbBaseElementsSteps {
     public SelenideElement getCardBrand() {
         return cards.getCardBrand().shouldBe(visible);
     }
-
-    public SelenideElement getNewCardPrice() {
-        return cards.getNewCardPrice().shouldBe(visible);
-    }
-
-    public SelenideElement getOldCardPrice() {
-        return cards.getOldCardPrice().shouldBe(visible);
-    }
 }
