@@ -35,10 +35,6 @@ public class WbCardsSteps extends WbBaseElementsSteps {
         return cards.getAddToBasketBtn();
     }
 
-    public SelenideElement getCardName() {
-        return cards.getCardName();
-    }
-
     public SelenideElement getCardBrand() {
         return cards.getCardBrand();
     }

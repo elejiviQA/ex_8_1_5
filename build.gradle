@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id "io.qameta.allure" version "2.11.2"
+    id 'io.qameta.allure' version 'latest.release'
 }
 
 group 'org.ot5usk'
@@ -10,22 +10,36 @@ repositories {
     mavenCentral()
 }
 
+def allureVersion = "2.24.0"
+def aspectJVersion = "1.9.20.1"
+
+configurations {
+    agent {
+        canBeResolved = true
+        canBeConsumed = true
+    }
+}
+
 dependencies {
-    implementation 'org.junit.jupiter:junit-jupiter:5.10.0'
-
-    implementation 'com.codeborne:selenide:7.0.4'
-
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
-
+    agent "org.aspectj:aspectjweaver:$aspectJVersion"
+    implementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    implementation 'com.codeborne:selenide:latest.release'
+    implementation 'io.cucumber:cucumber-java:7.11.1'
+    implementation 'io.qameta.allure:allure-selenide:2.25.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-console:1.9.2'
+    testImplementation platform("io.qameta.allure:allure-bom:$allureVersion")
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.9.2'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.11.1'
+    testImplementation 'io.cucumber:cucumber-junit:7.15.0'
     testImplementation 'org.aspectj:aspectjweaver:1.9.19'
-    testImplementation 'io.qameta.allure:allure-junit5:2.23.0'
-    testImplementation 'io.qameta.allure:allure-commandline:2.23.0'
-    testImplementation 'io.qameta.allure:allure-assertj:2.23.0'
-    testImplementation 'io.qameta.allure:allure-java-commons:2.23.0'
-    testImplementation 'io.qameta.allure:allure-selenide:2.23.0'
+    testImplementation "io.qameta.allure:allure-junit5"
+    testImplementation 'io.qameta.allure:allure-commandline:2.25.0'
+    testImplementation 'io.qameta.allure:allure-assertj:2.25.0'
+    testImplementation 'io.qameta.allure:allure-java-commons:2.25.0'
 }
 
 test {
-    useJUnitPlatform()
+    jvmArgs = [ "-javaagent:${configurations.agent.singleFile}" ]
 }

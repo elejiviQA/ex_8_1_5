@@ -11,7 +11,6 @@ public class WbSearchBarAsserts {
 
     private static final WbCatalogPageSteps catalogSteps = new WbCatalogPageSteps();
     private static final String expectedBaseRangingFilter = "По популярности";
-    private static final String expectedCardBrand = "Apple";
 
     @Step("Проверка результирующего заголовка")
     public static void expectedSearchBarResultsTitle(String expectedResultsTitle) {
@@ -29,8 +28,8 @@ public class WbSearchBarAsserts {
     }
 
     @Step("Проверка брэнда товара")
-    public static void checkCardBrand() {
-        assertEquals(expectedCardBrand, catalogSteps.cardsSteps().getCardBrand().shouldBe(visible).getText());
+    public static void checkCardBrand(String expectedProductBrand) {
+        assertEquals(expectedProductBrand, catalogSteps.cardsSteps().getCardBrand().shouldBe(visible).getText());
     }
 
     @Step("Проверка отсутствия крестика")

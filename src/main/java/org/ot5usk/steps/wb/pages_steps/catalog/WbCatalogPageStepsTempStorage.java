@@ -8,8 +8,6 @@ import static com.codeborne.selenide.Condition.visible;
 public class WbCatalogPageStepsTempStorage {
 
     private static final WbCatalogPageSteps catalogPageSteps = new WbCatalogPageSteps();
-    private static String cardNameInCatalog;
-    private static String cardBrandInCatalog;
     private static String newCardPriceInCatalog;
     private static String oldCardPriceInCatalog;
     private static String navBarCardsCounterBeforeUseFilters;
@@ -17,20 +15,8 @@ public class WbCatalogPageStepsTempStorage {
     @Step("Запоминание товара каталога")
     public static void rememberCatalogCard() {
         WbCardsSteps cardsSteps = catalogPageSteps.cardsSteps();
-        cardNameInCatalog = cardsSteps.getCardName().shouldBe(visible).getText();
-        cardBrandInCatalog = cardsSteps.getCardBrand().shouldBe(visible).getText();
         newCardPriceInCatalog = cardsSteps.getNewCardPrice().shouldBe(visible).getText();
         oldCardPriceInCatalog = cardsSteps.getOldCardPrice().shouldBe(visible).getText();
-    }
-
-    @Step("Получение названия товара в каталоге")
-    public static String getCardNameInCatalog() {
-        return cardNameInCatalog;
-    }
-
-    @Step("Получение брэнда товара в каталоге")
-    public static String getCardBrandInCatalog() {
-        return cardBrandInCatalog;
     }
 
     @Step("Получение актуальной цены товара в каталоге")

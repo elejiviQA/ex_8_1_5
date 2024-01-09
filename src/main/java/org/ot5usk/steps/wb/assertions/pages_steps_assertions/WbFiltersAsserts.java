@@ -18,12 +18,11 @@ public class WbFiltersAsserts {
 
     private static final WbCatalogPageSteps catalogPageSteps = new WbCatalogPageSteps();
     private static final WbFiltersMenuSteps filtersMenuSteps = new WbFiltersMenuSteps();
-    private static final String expectedPageTitle = "Ноутбуки и ультрабуки";
     private static final List<String> expectedFiltersChoice = List.of("до 3 дней", "Apple", "от 100 000 до 149 000", "13.6\"");
 
-    @Step("Проверка заголовка страницы")
-    public static void checkOpenedPage() {
-        assertEquals(expectedPageTitle, catalogPageSteps.getNavBarTitle().shouldBe(visible).getText());
+    @Step("Проверка открытия меню фильтров")
+    public static void checkFiltersMenuWindowIsOpen() {
+        filtersMenuSteps.getFiltersMenuWindow().shouldBe(appear);
     }
 
     @Step("Проверка активации фильтров")

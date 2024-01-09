@@ -9,20 +9,19 @@ public class WbSearchBarSteps {
 
     private final WbSearchBar searchBar;
 
-    public WbSearchBarSteps() {
-        this.searchBar = new WbSearchBar();
+    public WbSearchBarSteps(WbSearchBar searchBar) {
+        this.searchBar = searchBar;
     }
 
     @Step("Ввод запроса в поисковую строку")
-    public WbSearchBarSteps enterQuery(String query) {
+    public void enterQuery(String query) {
         searchBar.enterQuery(query);
-        return this;
     }
 
     @Step("Нажатие Enter в поисковой строке")
-    public WbCatalogPageSteps sendEnter() {
+    public void sendEnter() {
         searchBar.sendEnter();
-        return new WbCatalogPageSteps();
+        new WbCatalogPageSteps();
     }
 
     @Step("Нажатие на крестик поисковой строки")

@@ -1,6 +1,7 @@
 package org.ot5usk.steps.wb.pages_steps.elements_steps.base.change_city;
 
 import io.qameta.allure.Step;
+import org.ot5usk.pages.wb.elements.base.change_city.WbChangeCity;
 import org.ot5usk.steps.wb.pages_steps.elements_steps.base.change_city.menu.WbChangeCityMenuSteps;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -8,7 +9,7 @@ import static com.codeborne.selenide.Condition.visible;
 public class WbChangeCityStepsTempStorage {
 
     private static final WbChangeCityMenuSteps menuSteps = new WbChangeCityMenuSteps();
-    private static final WbChangeCitySteps changeCitySteps = new WbChangeCitySteps();
+    private static final WbChangeCitySteps changeCitySteps = new WbChangeCitySteps(new WbChangeCity());
     private static String firstAddress;
     private static String infoBlockAddress;
     private static String currentAddress;

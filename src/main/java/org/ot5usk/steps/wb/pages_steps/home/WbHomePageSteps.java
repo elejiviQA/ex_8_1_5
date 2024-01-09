@@ -14,8 +14,7 @@ public class WbHomePageSteps extends WbBaseElementsSteps {
 
 
     @Step("Открытие домашней страницы")
-    public WbHomePageSteps openHomePage() {
+    public void openHomePage() {
         home.open();
-        return this;
     }
 }

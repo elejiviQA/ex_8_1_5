@@ -20,9 +20,9 @@ public class WbSearchBar {
         searchInput.sendKeys(query);
     }
 
-    public WbCatalogPage sendEnter() {
+    public void sendEnter() {
         searchInput.sendKeys(Keys.ENTER);
-        return new WbCatalogPage();
+        new WbCatalogPage();
     }
 
     public void clickTheCross() {

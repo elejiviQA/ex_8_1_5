@@ -18,19 +18,17 @@ public class WbFlightsPageSteps {
     }
 
     @Step("Заполнение Точки: Откуда")
-    public WbFlightsPageSteps fillFrom(String from) {
+    public void fillFrom(String from) {
         flightsPage.fillFrom(from);
-        return this;
     }
 
     @Step("Заполнение Точки: Куда")
-    public WbFlightsPageSteps fillTo(String to) {
+    public void fillTo(String to) {
         flightsPage.fillTo(to);
-        return this;
     }
 
     @Step("Заполнение Даты: Туда")
-    public WbFlightsPageSteps fillDepartureDate(int inHowManyDays) {
+    public void fillDepartureDate(int inHowManyDays) {
         String desiredDate = String.valueOf(LocalDate.now().plusDays(inHowManyDays).getDayOfMonth());
         ElementsCollection departureDateTitles = flightsPage.clickDepartureDate().getDepartureDateTitles();
         for (SelenideElement departureDateTitle : departureDateTitles) {
@@ -39,13 +37,11 @@ public class WbFlightsPageSteps {
                 break;
             }
         }
-        return this;
     }
 
     @Step("Добавление второго взрослого пассажира")
-    public WbFlightsPageSteps addSecondAdultPassenger() {
+    public void addSecondAdultPassenger() {
         flightsPage.clickPassengers().clickAddAnAdultPassengerBtn();
-        return this;
     }
 
     @Step("Нажатие кнопки поиска")

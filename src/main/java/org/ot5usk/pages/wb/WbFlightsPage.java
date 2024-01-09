@@ -10,7 +10,6 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class WbFlightsPage {
 
-    private final static String URL = "https://vmeste.wildberries.ru/avia";
     private final SelenideElement from = $x("//span/input[@id='rc_select_0']");
     private final SelenideElement to = $x("//span/input[@id='rc_select_1']");
     private final SelenideElement departureDate = $x("//div[text()='Туда']");

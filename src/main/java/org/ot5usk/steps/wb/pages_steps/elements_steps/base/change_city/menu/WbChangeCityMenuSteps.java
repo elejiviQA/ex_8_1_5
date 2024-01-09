@@ -15,10 +15,14 @@ public class WbChangeCityMenuSteps {
         this.infoBlock = new WbChangeCityInfoBlock();
     }
 
-    @Step("Выполнение поискового запроса - поиск города")
-    public WbChangeCityMenuSteps executeQuery(String query) {
-        menu.searchBar().executeQuery(query);
-        return this;
+    @Step("Ввод запроса в поисковую строку: название города: {query}")
+    public void sendQuery(String query) {
+        menu.searchBar().sendQuery(query);
+    }
+
+    @Step("Выполнение запроса")
+    public void executeQuery() {
+        menu.searchBar().executeQuery();
     }
 
     public SelenideElement getFirstAddress() {

@@ -11,10 +11,6 @@ public class WbBasketPageSteps {
         this.basketPage = new WbBasketPage();
     }
 
-    public SelenideElement getCardTitle() {
-        return basketPage.getCardTitle();
-    }
-
     public SelenideElement getNewCardPrice() {
         return basketPage.getNewCardPrice();
     }

@@ -18,9 +18,9 @@ public class WbFiltersSteps {
     }
 
     @Step("Открыть меню фильтров")
-    public WbFiltersMenuSteps openFiltersMenu() {
+    public void openFiltersMenu() {
         filters.openAllFiltersMenu();
-        return new WbFiltersMenuSteps();
+        new WbFiltersMenuSteps();
     }
 
     public SelenideElement navBarFilterBtn() {

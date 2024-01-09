@@ -13,27 +13,23 @@ public class WbFiltersMenuSteps {
         this.filtersMenu = new WbFiltersMenu();
     }
 
-    @Step("Заполнение фильтра цен")
-    public WbFiltersMenuSteps fillPrices(String from, String to) {
-        filtersMenu.fillPrices(from, to);
-        return this;
+    public SelenideElement getFiltersMenuWindow() {
+        return filtersMenu.getFiltersMenuWindow();
     }
 
-    @Step("Выбор фильтра: до 3 дней")
-    public WbFiltersMenuSteps selectUpToThreeDays() {
-        filtersMenu.clickUpToThreeDays();
-        return this;
+    @Step("Заполнение фильтра: Цена от {from}")
+    public void fillPriceFrom(String from) {
+        filtersMenu.fillPriceFrom( from);
     }
 
-    @Step("Выбор фильтра: Apple/apple брэнд")
-    public WbFiltersMenuSteps selectAppleBrand() {
-        filtersMenu.clickAppleBrand();
-        return this;
+    @Step("Заполнение фильтра: Цена до {to}")
+    public void fillPriceTo(String to) {
+        filtersMenu.fillPriceTo( to);
     }
 
-    @Step("Выбор фильтра: 13.6 диагнональ")
-    public void selectScreenDiagonal() {
-        filtersMenu.clickScreenDiagonal();
+    @Step("Выбор фильтра: {name}")
+    public void selectFilter(String name) {
+        filtersMenu.selectFilter(name);
     }
 
     @Step("Нажатие на кнопку применения выбранных фильтров")

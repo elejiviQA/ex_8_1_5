@@ -25,21 +25,25 @@ public class WbBaseElements {
         return changeCity;
     }
 
+    public WbSearchBar searchBar() {
+        return searchBar;
+    }
+
     public WbSearchBar clickOnTheSearchBar() {
         return searchBar.click();
     }
 
-    public WbNavBarMenu clickNavBarBtn() {
+    public void clickNavBarBtn() {
         navBarMenuBtn.click();
-        return new WbNavBarMenu();
+        new WbNavBarMenu();
     }
 
     public SelenideElement getCounterOfCardsInBasket() {
         return counterOfCardsInBasket;
     }
 
-    public WbBasketPage clickGoToBasketBtn() {
+    public void clickGoToBasketBtn() {
         goToBasketBtn.click();
-        return new WbBasketPage();
+        new WbBasketPage();
     }
 }

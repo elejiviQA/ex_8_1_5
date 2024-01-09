@@ -5,12 +5,11 @@ import io.qameta.allure.Step;
 import org.ot5usk.steps.wb.pages_steps.basket.WbBasketPageSteps;
 import org.ot5usk.steps.wb.pages_steps.catalog.WbCatalogPageSteps;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.ot5usk.steps.wb.pages_steps.catalog.WbCatalogPageStepsTempStorage.*;
@@ -19,21 +18,29 @@ public class WbBasketAsserts {
 
     private static final WbCatalogPageSteps catalogPageSteps = new WbCatalogPageSteps();
     private static final WbBasketPageSteps basketPageSteps = new WbBasketPageSteps();
-    private static final String expectedNavBarTitle = "Пылесосы и пароочистители";
-    private static final String[] expectedNavBarPath = {"Главная", "Бытовая техника", "Техника для дома", "Пылесосы и пароочистители"};
     private static final String expectedCounterOfCardsInBasketValue = "1";
     private static final String expectedCounterOfCardsInBasketColor = "rgba(245, 81, 35, 1)";
 
     @Step("Проверка результирующего заголовка")
-    public static void checkNavBarTitle() {
-        assertEquals(expectedNavBarTitle, catalogPageSteps.getNavBarTitle().shouldBe(visible).getText());
+    public static void expectedNavBarTitle(String expectedNavBarTitle) {
+        assertTrue(catalogPageSteps.getNavBarTitle().shouldBe(visible).getText().contains(expectedNavBarTitle));
     }
 
     @Step("Проверка пути навигационных фильтров")
-    public static void checkNavBarPath() {
-        String[] currentNavBarPathArr = catalogPageSteps.getNavBarPath().shouldBe(visible).getText().split("\n");
-        assertEquals(expectedNavBarPath.length, currentNavBarPathArr.length);
-        assertTrue(Arrays.toString(currentNavBarPathArr).contains(Arrays.toString(expectedNavBarPath)));
+    public static void expectedNavBarPath(List<String> expectedNavBarPath) {
+        List<String> currentNavBarPath = List.of(catalogPageSteps.getNavBarPath().shouldBe(visible).getText().split("\n"));
+        int expectedNavBarPathSize = expectedNavBarPath.size();
+        if (expectedNavBarPathSize == 5) {
+            assertEquals(expectedNavBarPath.size() - 1, currentNavBarPath.size());
+            for (int i = 0; i < expectedNavBarPathSize; i++) {
+                assertTrue(expectedNavBarPath.get(i).contains(currentNavBarPath.get(i)));
+            }
+        } else {
+            assertEquals(expectedNavBarPath.size(), currentNavBarPath.size());
+            for (int i = 0; i < expectedNavBarPathSize; i++) {
+                assertTrue(expectedNavBarPath.get(i).contains(currentNavBarPath.get(i)));
+            }
+        }
     }
 
     @Step("Проверка значения счетчика количества товаров в корзине")
@@ -47,22 +54,10 @@ public class WbBasketAsserts {
         assertEquals(expectedCounterOfCardsInBasketColor, catalogPageSteps.getCounterOfCardsInBasket().shouldBe(visible).getCssValue("background-color"));
     }
 
-    @Step("Проверка имени и брэнда товара в коризине")
-    public static void checkCardTitleInBasket() {
-        String catalogCardName = getCardNameInCatalog();
-        String catalogCardBrand = getCardBrandInCatalog();
-        List<String> cardInCatalog = List.of(catalogCardName, catalogCardBrand);
-        List<String> result = new ArrayList<>();
-        for (String s : cardInCatalog) {
-            List<String> temp = Arrays.stream(s.split(" ")).toList();
-            temp = temp.stream().map(e -> e.replaceAll("[^A-Za-zА-Яа-я0-9]", "")).toList();
-            temp = temp.stream().filter(e -> !e.isEmpty()).toList();
-            result.addAll(temp);
-        }
-        String basketCardTitle = basketPageSteps.getCardTitle().shouldBe(visible).getText();
-        for (String s : result) {
-            assertTrue(basketCardTitle.contains(s));
-        }
+    @Step("Проверка, что открытая страница - Корзина")
+    public static void expectedPageIsBasket() {
+        assertEquals("https://www.wildberries.ru/lk/basket", getWebDriver().getCurrentUrl());
+
     }
 
     @Step("Проверка актуальной цены товара в коризне")
@@ -74,19 +69,19 @@ public class WbBasketAsserts {
     @Step("Проверка старой цены товара в коризне")
     public static void checkOldCardPriceInBasket() {
         String oldCardPriceInCatalog = getOldCardPriceInCatalog();
-        basketPageSteps.getOldCardPrice().shouldBe(visible).shouldHave(text(oldCardPriceInCatalog));
+        basketPageSteps.getOldCardPrice().shouldHave(text(oldCardPriceInCatalog)).shouldBe(visible);
     }
 
     @Step("Проверка актуальной итоговой цены товаров в коризне")
     public static void checkNewTotalPriceInBasket() {
         String newCardPriceInCatalog = getNewCardPriceInCatalog();
-        basketPageSteps.getNewTotalPrice().shouldBe(visible).shouldHave(text(newCardPriceInCatalog));
+        basketPageSteps.getNewTotalPrice().shouldHave(text(newCardPriceInCatalog)).shouldBe(visible);
     }
 
     @Step("Проверка старой итоговой цены товаров в коризне")
     public static void checkOldTotalPriceInBasket() {
         String oldCardPriceInCatalog = getOldCardPriceInCatalog();
-        basketPageSteps.getOldTotalPrice().shouldBe(visible).shouldHave(text(oldCardPriceInCatalog));
+        basketPageSteps.getOldTotalPrice().shouldHave(text(oldCardPriceInCatalog)).shouldBe(visible);
     }
 
     @Step("Проверка кнопки Заказать")

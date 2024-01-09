@@ -1,47 +1,54 @@
-package org.ot5usk.wb;
+package org.ot5usk.utils;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
-
 import io.qameta.allure.Attachment;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.ot5usk.BaseTest;
-import org.ot5usk.steps.wb.pages_steps.home.WbHomePageSteps;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
-public class WbBaseTest extends BaseTest {
+public class Util {
 
-    public static WbHomePageSteps wbHomePageSteps;
+    private final PrintStream originalOutput = System.out;
+    private AllureSelenide allureSelenide;
+    private final ByteArrayOutputStream logs = new ByteArrayOutputStream();
+    private final HashMap<String, String> infoAboutBrowser = new HashMap<>();
 
-    @BeforeAll
-    static void init() {
-        Selenide.open();
-        wbHomePageSteps = new WbHomePageSteps();
-        Configuration.timeout = 10000;
-        SelenideLogger.addListener("allure", new AllureSelenide());
+    public Util init() {
+        if (logs.toString().isEmpty()) {
+            redirectConsoleOutput();
+        }
+        if (allureSelenide == null) {
+            allureSelenide = new AllureSelenide();
+            SelenideLogger.addListener("allure", new AllureSelenide());
+            Configuration.timeout = 10000;
+            Configuration.browserSize = "1920x1080";
+            Selenide.open();
+            initInfoAboutBrowserIfNeed();
+        }
+        return this;
     }
 
-    @BeforeEach
-    void environment() {
-        initInfoAboutBrowserIfNeed();
+    private void redirectConsoleOutput() {
+        System.setOut(new PrintStream(logs));
+    }
+
+    public void clearBrowserLocalStorage() {
+        Selenide.clearBrowserLocalStorage();
+    }
+
+    public void attachmentEnvironment() {
         browserName();
         browserVersion();
         dateTime();
     }
-
-    @AfterEach
-    void clearBrowserLocalStorage() {
-        Selenide.clearBrowserLocalStorage();
-    }
-
 
     @Attachment("BrowserName")
     private byte[] browserName() {
@@ -58,13 +65,12 @@ public class WbBaseTest extends BaseTest {
         return LocalDateTime.now().toString().getBytes();
     }
 
-    private static void initInfoAboutBrowserIfNeed() {
+    private void initInfoAboutBrowserIfNeed() {
         if (System.out != originalOutput) {
             System.setOut(originalOutput);
         }
-
         if (infoAboutBrowser.size() == 0) {
-            List<String> logLinesList = Arrays.stream(outputFromConsole.toString().split("\n")).toList();
+            List<String> logLinesList = Arrays.stream(logs.toString().split("\n")).toList();
             String aboutBrowser = null;
             for (String s : logLinesList) {
                 if (s.contains("BrowserName")) {
@@ -72,7 +78,6 @@ public class WbBaseTest extends BaseTest {
                     break;
                 }
             }
-
             assert aboutBrowser != null;
             List<String> aboutBrowserLineSplitList = List.of(aboutBrowser.split(" "));
             List<String> aboutBrowserList = new ArrayList<>();
@@ -81,7 +86,6 @@ public class WbBaseTest extends BaseTest {
                     aboutBrowserList.add(s);
                 }
             }
-
             for (int i = 0; i < aboutBrowserList.size() - 1; i++) {
                 List<String> list = List.of(aboutBrowserList.get(i).split("="));
                 infoAboutBrowser.put(list.get(0), list.get(1));

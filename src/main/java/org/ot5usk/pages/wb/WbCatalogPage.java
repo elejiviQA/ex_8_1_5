@@ -9,7 +9,6 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class WbCatalogPage extends WbBaseElements {
 
-    private final static String URL = "https://www.wildberries.ru/catalog";
     private final WbFilters filters;
     private final WbCards cards;
     private final SelenideElement navBarPath = $x("//ul[contains(@class, 'breadcrumbs__list')]");
@@ -48,9 +47,9 @@ public class WbCatalogPage extends WbBaseElements {
         return counterOfCardsInBasket;
     }
 
-    public WbBasketPage clickGoToBasketBtn() {
+    public void clickGoToBasketBtn() {
         goToBasketBtn.click();
-        return new WbBasketPage();
+        new WbBasketPage();
     }
 
     public SelenideElement getSearchBarResultsTitle() {

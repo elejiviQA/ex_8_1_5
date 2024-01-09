@@ -2,7 +2,6 @@ package org.ot5usk.steps.wb.pages_steps.elements_steps.base.nav_bar_menu;
 
 import io.qameta.allure.Step;
 import org.ot5usk.pages.wb.elements.base.nav_bar_menu.WbNavBarMenu;
-import org.ot5usk.steps.wb.pages_steps.elements_steps.base.nav_bar_menu.wraps.WbFirstWrapNavBarMenuSteps;
 
 public class WbNavBarMenuSteps {
 
@@ -12,21 +11,26 @@ public class WbNavBarMenuSteps {
         this.navBarMenu = new WbNavBarMenu();
     }
 
-    @Step("Открытие меню: Бытовая техника")
-    public WbFirstWrapNavBarMenuSteps goToHouseholdAppliances() {
-        navBarMenu.goToHouseholdAppliances();
-        return new WbFirstWrapNavBarMenuSteps();
+    @Step("Наведение на категорию {name}")
+    public WbNavBarMenuSteps moveToCategory(String name) {
+        navBarMenu.moveToCategory(name);
+        return this;
     }
 
-    @Step("Открытие меню: Электроника")
-    public WbFirstWrapNavBarMenuSteps goToElectronics() {
-        navBarMenu.goToElectronics();
-        return new WbFirstWrapNavBarMenuSteps();
+    @Step("Нажатие на {name}")
+    public WbNavBarMenuSteps clickToFirstMenuElement(String name) {
+        navBarMenu.clickToFirstMenuElement(name);
+        return this;
     }
 
-    @Step("Открытие меню: Путешествия")
-    public WbFirstWrapNavBarMenuSteps goToTravels() {
-        navBarMenu.goToTravels();
-        return new WbFirstWrapNavBarMenuSteps();
+    @Step("Нажатие на {name}")
+    public WbNavBarMenuSteps clickToSecondMenuElement(String name) {
+        navBarMenu.clickToSecondMenuElement(name);
+        return this;
+    }
+
+    @Step("Нажатие на {name}")
+    public void clickToLink(String name) {
+        navBarMenu.clickToLink(name);
     }
 }

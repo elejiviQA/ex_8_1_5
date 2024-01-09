@@ -11,14 +11,14 @@ public class WbChangeCitySteps {
 
     private final WbChangeCity changeCity;
 
-    public WbChangeCitySteps() {
-        this.changeCity = new WbChangeCity();
+    public WbChangeCitySteps(WbChangeCity changeCity) {
+        this.changeCity = changeCity;
     }
 
     @Step("Открытие меню смены города")
-    public WbChangeCityMenuSteps openMenu() {
+    public void openMenu() {
         changeCity.openMenu();
-        return new WbChangeCityMenuSteps();
+        new WbChangeCityMenuSteps();
     }
 
     public SelenideElement getCurrentAddress() {

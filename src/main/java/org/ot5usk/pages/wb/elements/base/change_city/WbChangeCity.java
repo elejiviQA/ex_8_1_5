@@ -10,9 +10,9 @@ public class WbChangeCity {
     private final SelenideElement menu = $x("//li[contains(@class, 'simple-menu__item j-geocity-wrap')]");
     private final SelenideElement currentAddress = $x("//span[contains(@data-wba-header-name, 'DLV_Adress')]");
 
-    public WbChangeCityMenu openMenu() {
+    public void openMenu() {
         menu.click();
-        return new WbChangeCityMenu();
+        new WbChangeCityMenu();
     }
 
     public SelenideElement getCurrentAddress() {

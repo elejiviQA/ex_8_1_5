@@ -12,8 +12,11 @@ public class WbChangeCitySearchBar {
     private final SelenideElement searchBtn = $x("//ymaps[@class='ymaps-2-1-79-searchbox__button-cell']");
     private final SelenideElement searchBarMenu = $x("//ymaps[@class='ymaps-2-1-79-searchbox-list-button']");
 
-    public void executeQuery(String query) {
+    public void sendQuery(String query) {
         searchBar.shouldBe(appear).sendKeys(query);
+    }
+
+    public void executeQuery() {
         searchBtn.shouldBe(appear).click();
         searchBarMenu.shouldBe(appear).click();
         searchBar.sendKeys(Keys.ARROW_DOWN, Keys.RETURN);

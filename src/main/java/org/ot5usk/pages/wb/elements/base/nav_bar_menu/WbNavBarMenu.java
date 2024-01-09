@@ -1,30 +1,44 @@
 package org.ot5usk.pages.wb.elements.base.nav_bar_menu;
 
 import com.codeborne.selenide.SelenideElement;
-import org.ot5usk.pages.wb.elements.base.nav_bar_menu.wraps.WbFirstWrapNavBarMenu;
+import org.ot5usk.pages.wb.elements.Element;
+import org.ot5usk.pages.wb.elements.base.nav_bar_menu.nav_bar_menus_elements_data.WbCategoriesElements;
+import org.ot5usk.pages.wb.elements.base.nav_bar_menu.nav_bar_menus_elements_data.wraps.WbFirstMenuElements;
+import org.ot5usk.pages.wb.elements.base.nav_bar_menu.nav_bar_menus_elements_data.wraps.WbSecondMenuElements;
+import org.ot5usk.pages.wb.elements.base.nav_bar_menu.nav_bar_menus_elements_data.wraps.WbThirdMenuLinks;
 
 import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.actions;
 
 public class WbNavBarMenu {
 
-    private final SelenideElement householdAppliances = $x("//ul[@class='menu-burger__main-list']//a[text()='Бытовая техника']");
-    private final SelenideElement electronics = $x("//ul[@class='menu-burger__main-list']//a[text()='Электроника']");
-    private final SelenideElement travels = $x("//li[@data-menu-id='61037']//a[text()='Путешествия']");
+    private final Element category = WbCategoriesElements::getCategory;
+    private final Element firstMenuElement = WbFirstMenuElements::getFirstMenuElement;
+    private final Element secondMenuElement = WbSecondMenuElements::getSecondMenuElement;
+    private final Element link = WbThirdMenuLinks::getLink;
 
-    public WbFirstWrapNavBarMenu goToHouseholdAppliances() {
-        actions().moveToElement(householdAppliances.shouldBe(appear)).build().perform();
-        return new WbFirstWrapNavBarMenu();
+    public void moveToCategory(String name) {
+        moveTo(category.get(name));
     }
 
-    public WbFirstWrapNavBarMenu goToElectronics() {
-        actions().moveToElement(electronics.shouldBe(appear)).build().perform();
-        return new WbFirstWrapNavBarMenu();
+    public void clickToFirstMenuElement(String name) {
+        clickTo(firstMenuElement.get(name));
     }
 
-    public WbFirstWrapNavBarMenu goToTravels() {
-        actions().moveToElement(travels.shouldBe(appear)).build().perform();
-        return new WbFirstWrapNavBarMenu();
+    public void clickToSecondMenuElement(String name) {
+        clickTo(secondMenuElement.get(name));
+    }
+
+    public void clickToLink(String name) {
+        clickTo(link.get(name));
+    }
+
+    private void moveTo(SelenideElement element) {
+        actions().moveToElement(element.shouldBe(appear)).build().perform();
+    }
+
+    private void clickTo(SelenideElement element) {
+        element.shouldBe(visible).click();
     }
 }

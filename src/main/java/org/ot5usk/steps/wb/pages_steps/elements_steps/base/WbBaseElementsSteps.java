@@ -17,19 +17,21 @@ public class WbBaseElementsSteps {
 
     @Step("Нажатие на поисковую строку")
     public WbSearchBarSteps clickOnTheSearchBar() {
-        baseElements.clickOnTheSearchBar();
-        return new WbSearchBarSteps();
+        return new WbSearchBarSteps(baseElements.clickOnTheSearchBar());
+    }
+
+    public WbSearchBarSteps searchBar() {
+        return new WbSearchBarSteps(baseElements.searchBar());
     }
 
     public WbChangeCitySteps changeCity() {
-        baseElements.changeCity();
-        return new WbChangeCitySteps();
+        return new WbChangeCitySteps(baseElements.changeCity());
     }
 
     @Step("Нажатие на кнопку открытия меню навигационных фильтров")
-    public WbNavBarMenuSteps clickNavBarBtn() {
+    public void clickNavBarBtn() {
         baseElements.clickNavBarBtn();
-        return new WbNavBarMenuSteps();
+        new WbNavBarMenuSteps();
     }
 
     @Step("Нажатие кнопки перехода в Коризну")
