@@ -10,9 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.ot5usk.steps.wb.pages_steps.card.WbCardPageStepsTempStorage.getCardName;
 import static org.ot5usk.steps.wb.pages_steps.catalog.WbCatalogPageStepsTempStorage.*;
 
 public class WbBasketAsserts {
@@ -26,32 +26,25 @@ public class WbBasketAsserts {
 
     @Step("Проверка результирующего заголовка")
     public static void checkNavBarTitle() {
-        assertEquals(expectedNavBarTitle, catalogPageSteps.getNavBarTitle().getText());
+        assertEquals(expectedNavBarTitle, catalogPageSteps.getNavBarTitle().shouldBe(visible).getText());
     }
 
     @Step("Проверка пути навигационных фильтров")
     public static void checkNavBarPath() {
-        String[] currentNavBarPathArr = catalogPageSteps.getNavBarPath().getText().split("\n");
+        String[] currentNavBarPathArr = catalogPageSteps.getNavBarPath().shouldBe(visible).getText().split("\n");
         assertEquals(expectedNavBarPath.length, currentNavBarPathArr.length);
         assertTrue(Arrays.toString(currentNavBarPathArr).contains(Arrays.toString(expectedNavBarPath)));
     }
 
     @Step("Проверка значения счетчика количества товаров в корзине")
     public static void checkCounterOfCardsInBasketValue() {
-        assertEquals(expectedCounterOfCardsInBasketValue, catalogPageSteps.getCounterOfCardsInBasket().getText());
+        assertEquals(expectedCounterOfCardsInBasketValue, catalogPageSteps.getCounterOfCardsInBasket().shouldBe(visible).getText());
 
     }
 
     @Step("Проверка цвета счетчика количества товаров в корзине")
     public static void checkCounterOfCardsInBasketColor() {
-        assertEquals(expectedCounterOfCardsInBasketColor, catalogPageSteps.getCounterOfCardsInBasket().getCssValue("background-color"));
-    }
-
-    @Step("Проверка наличия товара в корзине путём сверки имен товаров: со страницы карточки товара и товара в корзине")
-    public static void checkCardNameInBasket() {
-        String expectedProductName = getCardName();
-        String actualProductName = basketPageSteps.getCardName().getText();
-        assertEquals(expectedProductName, actualProductName);
+        assertEquals(expectedCounterOfCardsInBasketColor, catalogPageSteps.getCounterOfCardsInBasket().shouldBe(visible).getCssValue("background-color"));
     }
 
     @Step("Проверка имени и брэнда товара в коризине")
@@ -66,7 +59,7 @@ public class WbBasketAsserts {
             temp = temp.stream().filter(e -> !e.isEmpty()).toList();
             result.addAll(temp);
         }
-        String basketCardTitle = basketPageSteps.getCardTitle().getText();
+        String basketCardTitle = basketPageSteps.getCardTitle().shouldBe(visible).getText();
         for (String s : result) {
             assertTrue(basketCardTitle.contains(s));
         }
@@ -75,30 +68,30 @@ public class WbBasketAsserts {
     @Step("Проверка актуальной цены товара в коризне")
     public static void checkNewCardPriceInBasket() {
         String newCardPriceInCatalog = getNewCardPriceInCatalog();
-        basketPageSteps.getNewCardPrice().shouldHave(text(newCardPriceInCatalog));
+        basketPageSteps.getNewCardPrice().shouldBe(visible).shouldHave(text(newCardPriceInCatalog));
     }
 
     @Step("Проверка старой цены товара в коризне")
     public static void checkOldCardPriceInBasket() {
         String oldCardPriceInCatalog = getOldCardPriceInCatalog();
-        basketPageSteps.getOldCardPrice().shouldHave(text(oldCardPriceInCatalog));
+        basketPageSteps.getOldCardPrice().shouldBe(visible).shouldHave(text(oldCardPriceInCatalog));
     }
 
     @Step("Проверка актуальной итоговой цены товаров в коризне")
     public static void checkNewTotalPriceInBasket() {
         String newCardPriceInCatalog = getNewCardPriceInCatalog();
-        basketPageSteps.getNewTotalPrice().shouldHave(text(newCardPriceInCatalog));
+        basketPageSteps.getNewTotalPrice().shouldBe(visible).shouldHave(text(newCardPriceInCatalog));
     }
 
     @Step("Проверка старой итоговой цены товаров в коризне")
     public static void checkOldTotalPriceInBasket() {
         String oldCardPriceInCatalog = getOldCardPriceInCatalog();
-        basketPageSteps.getOldTotalPrice().shouldHave(text(oldCardPriceInCatalog));
+        basketPageSteps.getOldTotalPrice().shouldBe(visible).shouldHave(text(oldCardPriceInCatalog));
     }
 
     @Step("Проверка кнопки Заказать")
     public static void checkOrderBtnInBasket() {
-        SelenideElement orderBtn = basketPageSteps.getOrderBtn();
+        SelenideElement orderBtn = basketPageSteps.getOrderBtn().shouldBe(visible);
         assertTrue(orderBtn.isDisplayed());
         assertTrue(orderBtn.isEnabled());
     }

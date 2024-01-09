@@ -8,6 +8,7 @@ import org.ot5usk.steps.wb.pages_steps.catalog.WbCatalogPageSteps;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.appear;
+import static com.codeborne.selenide.Condition.visible;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.ot5usk.steps.wb.pages_steps.catalog.WbCatalogPageStepsTempStorage.getNavBarCardsCounter;
@@ -22,21 +23,21 @@ public class WbFiltersAsserts {
 
     @Step("Проверка заголовка страницы")
     public static void checkOpenedPage() {
-        assertEquals(expectedPageTitle, catalogPageSteps.getNavBarTitle().getText());
+        assertEquals(expectedPageTitle, catalogPageSteps.getNavBarTitle().shouldBe(visible).getText());
     }
 
     @Step("Проверка активации фильтров")
     public static void checkFiltersActivity() {
         String navBarCardsCounterBeforeUseFilters = getNavBarCardsCounter();
         String before = navBarCardsCounterBeforeUseFilters.replaceAll("[^0-9]", "");
-        String after = catalogPageSteps.getNavBarCardsCounter().getText().replaceAll("[^0-9]", "");
+        String after = catalogPageSteps.getNavBarCardsCounter().shouldBe(visible).getText().replaceAll("[^0-9]", "");
         assertTrue(Long.parseLong(after) <= Long.parseLong(before)); // <=, =?
     }
 
     @Step("Проверка равенства количества товаров в меню фильтров и количества товаров на странице каталога")
     public static void checkProductsCounter() {
         String productsCounterInFilterMenu = getProductsCounterInFiltersMenu().replaceAll("[^0-9]", "");
-        String navBarCardsCounter = catalogPageSteps.getNavBarCardsCounter().getText().replaceAll("[^0-9]", "");
+        String navBarCardsCounter = catalogPageSteps.getNavBarCardsCounter().shouldBe(visible).getText().replaceAll("[^0-9]", "");
         assertEquals(productsCounterInFilterMenu, navBarCardsCounter);
     }
 
@@ -45,7 +46,7 @@ public class WbFiltersAsserts {
         ElementsCollection choices = catalogPageSteps.filtersSteps().getSelectedFilters();
         for (int i = 0; i < expectedFiltersChoice.size(); i++) {
             assertTrue(choices.get(i).isDisplayed());
-            assertEquals(expectedFiltersChoice.get(i).toLowerCase(), choices.get(i).getText().toLowerCase());
+            assertEquals(expectedFiltersChoice.get(i).toLowerCase(), choices.get(i).shouldBe(visible).getText().toLowerCase());
         }
     }
 

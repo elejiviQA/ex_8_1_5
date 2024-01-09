@@ -5,6 +5,7 @@ import org.ot5usk.pages.wb.elements.flights.WbDepartureDatesTable;
 import org.ot5usk.pages.wb.elements.flights.WbPassengersTable;
 
 import static com.codeborne.selenide.Condition.appear;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class WbFlightsPage {
@@ -28,17 +29,17 @@ public class WbFlightsPage {
     }
 
     public WbDepartureDatesTable clickDepartureDate() {
-        departureDate.click();
+        departureDate.shouldBe(visible).click();
         return new WbDepartureDatesTable();
     }
 
     public WbPassengersTable clickPassengers() {
-        passengers.click();
+        passengers.shouldBe(visible).click();
         return new WbPassengersTable();
     }
 
     public void clickSearchBtn() {
-        searchTicketsBtn.click();
+        searchTicketsBtn.shouldBe(visible).click();
         searchResult.shouldBe(appear);
     }
 }

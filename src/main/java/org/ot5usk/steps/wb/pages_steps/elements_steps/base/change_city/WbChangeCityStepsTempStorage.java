@@ -3,6 +3,8 @@ package org.ot5usk.steps.wb.pages_steps.elements_steps.base.change_city;
 import io.qameta.allure.Step;
 import org.ot5usk.steps.wb.pages_steps.elements_steps.base.change_city.menu.WbChangeCityMenuSteps;
 
+import static com.codeborne.selenide.Condition.visible;
+
 public class WbChangeCityStepsTempStorage {
 
     private static final WbChangeCityMenuSteps menuSteps = new WbChangeCityMenuSteps();
@@ -13,7 +15,7 @@ public class WbChangeCityStepsTempStorage {
 
     @Step("Запоминание первого адреса из результирующего списка")
     public static void rememberFirstAddress() {
-        firstAddress = menuSteps.getFirstAddress().getText();
+        firstAddress = menuSteps.getFirstAddress().shouldBe(visible).getText();
     }
 
     @Step("Получение первого адреса из результирующего списка")
@@ -23,7 +25,7 @@ public class WbChangeCityStepsTempStorage {
 
     @Step("Запоминание адреса из блока информации о центре выдачи")
     public static void rememberInfoBlockAddress() {
-        infoBlockAddress = menuSteps.getInfoBlockAddress().getText();
+        infoBlockAddress = menuSteps.getInfoBlockAddress().shouldBe(visible).getText();
     }
 
     @Step("Получение адреса из блока информации о центре выдачи")
@@ -34,7 +36,7 @@ public class WbChangeCityStepsTempStorage {
     @Step("Получение текущего адреса доставки")
     public static String getCurrentAddress() {
         if (currentAddress == null) {
-            currentAddress = changeCitySteps.getCurrentAddress().getText();
+            currentAddress = changeCitySteps.getCurrentAddress().shouldBe(visible).getText();
         }
         return currentAddress;
     }

@@ -1,6 +1,6 @@
 package org.ot5usk.wb;
 
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,13 +13,20 @@ import static org.ot5usk.steps.wb.pages_steps.elements_steps.base.change_city.Wb
 
 public class ChangeCityTest extends WbBaseTest {
 
+    @Feature("Пункт выдачи")
+    @Story("Смена города")
+    @Severity(SeverityLevel.BLOCKER)
+    @Owner("Vladimir Voblikov")
     @DisplayName("Смена города")
     @Description("Проверка результатов: ввода запроса, выбора адреса")
     @ParameterizedTest(name = "Запрос: {0}")
     @CsvSource("Санкт-Петербург")
     void testChangeCity(String query) {
 
-        WbChangeCityMenuSteps menuSteps = wbHomePageSteps.changeCity().openMenu().executeQuery(query);
+        WbChangeCityMenuSteps menuSteps = wbHomePageSteps.openHomePage()
+                .changeCity()
+                .openMenu()
+                .executeQuery(query);
 
         rememberFirstAddress();
 

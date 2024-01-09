@@ -1,6 +1,6 @@
 package org.ot5usk.wb;
 
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,13 +14,17 @@ import static org.ot5usk.steps.wb.pages_steps.elements_steps.catalog.filters.WbF
 
 public class FiltersTest extends WbBaseTest {
 
+    @Feature("Фильтры")
+    @Story("Работа с фильтрами")
+    @Severity(SeverityLevel.BLOCKER)
+    @Owner("Vladimir Voblikov")
     @DisplayName("Работа с фильтрами")
     @Description("Проверка результатов: выбора фильтров")
     @ParameterizedTest(name = "Цена товара от {0} и до {1}")
     @CsvSource("100000, 149000")
     void testFilters(String priceFrom, String priceTo) {
 
-        WbCatalogPageSteps catalogPageSteps = wbHomePageSteps
+        WbCatalogPageSteps catalogPageSteps = wbHomePageSteps.openHomePage()
                 .clickNavBarBtn()
                 .goToElectronics()
                 .clickLaptopsNdComputers()

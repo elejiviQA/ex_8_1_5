@@ -18,11 +18,13 @@ public class WbNavBarMenuSteps {
         return new WbFirstWrapNavBarMenuSteps();
     }
 
+    @Step("Открытие меню: Электроника")
     public WbFirstWrapNavBarMenuSteps goToElectronics() {
         navBarMenu.goToElectronics();
         return new WbFirstWrapNavBarMenuSteps();
     }
 
+    @Step("Открытие меню: Путешествия")
     public WbFirstWrapNavBarMenuSteps goToTravels() {
         navBarMenu.goToTravels();
         return new WbFirstWrapNavBarMenuSteps();

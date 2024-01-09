@@ -12,7 +12,7 @@ public class WbThirdWrapNavBarMenuSteps {
         thirdWrapNavBarMenu = new WbThirdWrapNavBarMenu();
     }
 
-    @Step("Нажатие на ссылку: Пылесосы и пароочистители")
+    @Step("Нажатие на Пылесосы и пароочистители")
     public WbCatalogPageSteps clickVacuumNdSteamCleaners2() {
         thirdWrapNavBarMenu.clickVacuumNdSteamCleaners2();
         return new WbCatalogPageSteps();

@@ -1,7 +1,6 @@
 package org.ot5usk.wb;
 
-import com.codeborne.selenide.Selenide;
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.ot5usk.steps.wb.pages_steps.catalog.WbCatalogPageSteps;
@@ -12,14 +11,16 @@ import static org.ot5usk.steps.wb.pages_steps.catalog.WbCatalogPageStepsTempStor
 
 public class BasketTest extends WbBaseTest {
 
+    @Feature("Корзина")
+    @Story("Добавление товара в корзину")
+    @Severity(SeverityLevel.BLOCKER)
+    @Owner("Vladimir Voblikov")
     @DisplayName("Добавление товара в корзину")
     @Description("Проверка результатов: выбора навигационных фильтров, добавления товара в коризну")
     @Test
     void testBasket() {
 
-        Selenide.clearBrowserLocalStorage();
-
-        WbCatalogPageSteps catalogPageSteps = wbHomePageSteps
+        WbCatalogPageSteps catalogPageSteps = wbHomePageSteps.openHomePage()
                 .clickNavBarBtn()
                 .goToHouseholdAppliances()
                 .clickHomeAppliances()

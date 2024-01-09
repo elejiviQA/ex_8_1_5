@@ -21,7 +21,6 @@ public class WbBaseElementsSteps {
         return new WbSearchBarSteps();
     }
 
-    @Step("Обращение к элементу смены города")
     public WbChangeCitySteps changeCity() {
         baseElements.changeCity();
         return new WbChangeCitySteps();
@@ -34,8 +33,8 @@ public class WbBaseElementsSteps {
     }
 
     @Step("Нажатие кнопки перехода в Коризну")
-    public WbBasketPageSteps clickGoToBasketBtn() {
+    public void clickGoToBasketBtn() {
         baseElements.clickGoToBasketBtn();
-        return new WbBasketPageSteps();
+        new WbBasketPageSteps();
     }
 }

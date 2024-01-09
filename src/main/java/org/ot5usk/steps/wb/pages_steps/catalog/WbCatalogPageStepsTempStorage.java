@@ -1,6 +1,9 @@
 package org.ot5usk.steps.wb.pages_steps.catalog;
 
 import io.qameta.allure.Step;
+import org.ot5usk.steps.wb.pages_steps.elements_steps.catalog.cards.WbCardsSteps;
+
+import static com.codeborne.selenide.Condition.visible;
 
 public class WbCatalogPageStepsTempStorage {
 
@@ -13,10 +16,11 @@ public class WbCatalogPageStepsTempStorage {
 
     @Step("Запоминание товара каталога")
     public static void rememberCatalogCard() {
-        cardNameInCatalog = catalogPageSteps.cardsSteps().getCardName().getText();
-        cardBrandInCatalog = catalogPageSteps.cardsSteps().getCardBrand().getText();
-        newCardPriceInCatalog = catalogPageSteps.cardsSteps().getNewCardPrice().getText();
-        oldCardPriceInCatalog = catalogPageSteps.cardsSteps().getOldCardPrice().getText();
+        WbCardsSteps cardsSteps = catalogPageSteps.cardsSteps();
+        cardNameInCatalog = cardsSteps.getCardName().shouldBe(visible).getText();
+        cardBrandInCatalog = cardsSteps.getCardBrand().shouldBe(visible).getText();
+        newCardPriceInCatalog = cardsSteps.getNewCardPrice().shouldBe(visible).getText();
+        oldCardPriceInCatalog = cardsSteps.getOldCardPrice().shouldBe(visible).getText();
     }
 
     @Step("Получение названия товара в каталоге")
@@ -41,7 +45,7 @@ public class WbCatalogPageStepsTempStorage {
 
     @Step("Запоминание значения счетчика количества товаров до использования фильтров")
     public static void rememberNavBarCardsCounter() {
-        navBarCardsCounterBeforeUseFilters = catalogPageSteps.getNavBarCardsCounter().getText();
+        navBarCardsCounterBeforeUseFilters = catalogPageSteps.getNavBarCardsCounter().shouldBe(visible).getText();
     }
 
     @Step("Получение значения счетчика количества товаров до использования фильтров")

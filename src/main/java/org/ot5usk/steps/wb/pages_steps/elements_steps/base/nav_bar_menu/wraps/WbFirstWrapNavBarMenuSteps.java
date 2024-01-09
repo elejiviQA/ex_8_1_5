@@ -18,11 +18,13 @@ public class WbFirstWrapNavBarMenuSteps {
         return new WbSecondWrapNavBarMenuSteps();
     }
 
+    @Step("Открытие меню: Ноутбуки и компьютеры")
     public WbSecondWrapNavBarMenuSteps clickLaptopsNdComputers() {
         firstWrapNavBarMenu.clickLaptopsNdComputers();
         return new WbSecondWrapNavBarMenuSteps();
     }
 
+    @Step("Нажатие на Авиабилеты")
     public WbFlightsPageSteps clickFlights() {
         firstWrapNavBarMenu.clickFlights();
         return new WbFlightsPageSteps();

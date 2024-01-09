@@ -5,6 +5,8 @@ import io.qameta.allure.Step;
 import org.ot5usk.pages.wb.elements.base.change_city.WbChangeCity;
 import org.ot5usk.steps.wb.pages_steps.elements_steps.base.change_city.menu.WbChangeCityMenuSteps;
 
+import static com.codeborne.selenide.Condition.visible;
+
 public class WbChangeCitySteps {
 
     private final WbChangeCity changeCity;
@@ -19,8 +21,7 @@ public class WbChangeCitySteps {
         return new WbChangeCityMenuSteps();
     }
 
-    @Step("Поиск текущего адреса")
     public SelenideElement getCurrentAddress() {
-        return changeCity.getCurrentAddress();
+        return changeCity.getCurrentAddress().shouldBe(visible);
     }
 }

@@ -7,6 +7,8 @@ import org.ot5usk.pages.wb.WbFlightsPage;
 
 import java.time.LocalDate;
 
+import static com.codeborne.selenide.Condition.visible;
+
 public class WbFlightsPageSteps {
 
     private final WbFlightsPage flightsPage;
@@ -32,8 +34,8 @@ public class WbFlightsPageSteps {
         String desiredDate = String.valueOf(LocalDate.now().plusDays(inHowManyDays).getDayOfMonth());
         ElementsCollection departureDateTitles = flightsPage.clickDepartureDate().getDepartureDateTitles();
         for (SelenideElement departureDateTitle : departureDateTitles) {
-            if (departureDateTitle.getText().equals(desiredDate)) {
-                departureDateTitle.click();
+            if (departureDateTitle.shouldBe(visible).getText().equals(desiredDate)) {
+                departureDateTitle.shouldBe(visible).click();
                 break;
             }
         }
